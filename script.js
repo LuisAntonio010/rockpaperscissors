@@ -9,16 +9,22 @@ function computerPlay(){
 }
 
 function playerPlay(){
-   let playerChoise =  prompt('choose rock, paper, or scissors');
 
-    if (playerChoise.toLowerCase() === 'rock'){
-        return playerChoise = choices[0];
-    } else if (playerChoise.toLowerCase() === 'paper') {
-        return playerChoise = choices[1];
-    } else if (playerChoise.toLowerCase() === 'scissors') {
-        return playerChoise = choices[2];
-    } else {
-       return console.log('something went wrong')
+   let playerChoise = '';
+
+    while(playerChoise != choices[0,1,2]){
+        playerChoise= prompt('Choose Rock, Paper, or Scissors')
+    
+
+        if (playerChoise.toLowerCase() === 'rock'){
+            return playerChoise = choices[0];
+        } else if (playerChoise.toLowerCase() === 'paper') {
+            return playerChoise = choices[1];
+        } else if (playerChoise.toLowerCase() === 'scissors') {
+            return playerChoise = choices[2];
+        } else {
+        console.log('something went wrong')
+        }
     }
 }
 
@@ -84,7 +90,3 @@ function game() {
     scoreBoard() 
     finalResult()
  }
-
-
-
-
