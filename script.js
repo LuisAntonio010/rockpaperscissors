@@ -1,6 +1,24 @@
 
 const choices = ['rock', 'paper', 'scissors'];
 
+const rockButton = document.querySelector(".rockButton")
+const paperButton = document.querySelector(".paperButton")
+const scissorsButton = document.querySelector(".scissorsButton")
+
+const guessSubmit = document.querySelectorAll('button')
+
+const result = document.querySelector('.result')
+const resultList = document.createElement('div')
+result.appendChild(resultList)
+const playerPick = document.createElement('div')
+result.appendChild(playerPick)
+const computerPick = document.createElement('div')
+result.appendChild(computerPick)
+
+const scoreResult = document.querySelector('.scoreResult')
+const finalScore = document.createElement('div')
+scoreResult.appendChild(finalScore)
+
 let playerScore = 0;
 let computerScore = 0;
 
@@ -8,85 +26,93 @@ function computerPlay(){
     return choices[Math.floor(Math.random() * 3)];
 }
 
-function playerPlay(){
+rockButton.addEventListener("click", e => {
+    document.getElementsByClassName("rockButton") ;
+    playerSelection = 'rock'
+    playRound() 
+    scoreBoard()
+    finalResult()
+})
 
-   let playerChoise = '';
+paperButton.addEventListener("click", e => {
+    document.getElementsByClassName("paperButton")
+    playerSelection = 'paper'
+    playRound() 
+    scoreBoard()
+    finalResult()
 
-    while(playerChoise != choices[0,1,2]){
-        playerChoise= prompt('Choose Rock, Paper, or Scissors')
     
+})
 
-        if (playerChoise.toLowerCase() === 'rock'){
-            return playerChoise = choices[0];
-        } else if (playerChoise.toLowerCase() === 'paper') {
-            return playerChoise = choices[1];
-        } else if (playerChoise.toLowerCase() === 'scissors') {
-            return playerChoise = choices[2];
-        } else {
-        console.log('something went wrong')
-        }
-    }
-}
+scissorsButton.addEventListener("click", e => {
+    document.getElementsByClassName("scissorsButton")
+    playerSelection = 'scissors'
+    playRound() 
+    scoreBoard()
+    finalResult()
+ 
+})
 
 function playRound() {
 
-    const playerSelection = playerPlay();
-    console.log(`player chose: ${playerSelection}`); 
-    const computerSelection = computerPlay();
-    console.log(`computer chose: ${computerSelection}`); 
+    computerSelection = computerPlay();
+
+    playerPick.textContent = `Player chose: ${playerSelection}`    
+    computerPick.textContent = `Computer chose: ${computerSelection}`
     
     if (playerSelection === choices[0] && computerSelection === choices[0]) {
-        console.log('%cTie!! go again!', 'color:blue') ;
+        resultList.textContent = (`Tie!!go again!` )
+        
+
     } else if (playerSelection === choices[0]&& computerSelection === choices[1]) {
-        console.log('%cCOMPUTER WINS! Paper beats rock', 'color:red') ;
+        resultList.textContent = `COMPUTER WINS! \n  Paper beats rock `
         computerScore++;
+
     } else if (playerSelection === choices[0] && computerSelection === choices[2]) {
-        console.log('%cPLAYER WINS!Rock beats Scissors', 'color:green') ; 
+        resultList.textContent = `PLAYER WINS! \n  Rock beats Scissors`
         playerScore++;
 
     } else if (playerSelection === choices[1] && computerSelection === choices[0]) {
-        console.log('%cPLAYER WINS! Paper beats Rock', 'color:green') ;
+        resultList.textContent = 'PLAYER WINS! Paper beats Rock', 'color:green'
         playerScore++        
+
     } else if (playerSelection === choices[1] && computerSelection === choices[1]) {
-        console.log('%cTie!! go again!', 'color:blue') ;  ;
+        resultList.textContent = 'Tie!! go again!', 'color:blue'
     } else if (playerSelection === choices[1] && computerSelection === choices[2]) {
-        console.log('%cCOMPUTER WINS!  Scissors beat paper', 'color:red') ;
-        computerScore++;
+        resultList.textContent = 'COMPUTER WINS!  Scissors beat paper', 'color:red' ;
+        computerScore++
 
     } else if (playerSelection === choices[2] && computerSelection === choices[0]) {
-        console.log('%cCOMPUTER WINS! Rocks beat Scisoors', 'color:red') ;
+        resultList.textContent = 'COMPUTER WINS! Rocks beat Scisoors'
         computerScore++;
     } else if (playerSelection === choices[2] && computerSelection === choices[1]) {
-        console.log ('%cPLAYER WINS! you won! Scisoors beats Paer', 'color:green') ;
+        resultList.textContent = 'PLAYER WINS! you won! Scisoors beats Paer'
         playerScore++;
     } else if (playerSelection === choices[2] && computerSelection === choices[2]) {
-        console.log('%cTie!! go again!', 'color:blue') ; ;
+        resultList.textContent = 'Tie!! go again!' 
 
     } else {
-        return ('something went wrong')
+        resultList.textContent ='something went wrong'
     }
 }
 
 function scoreBoard(){
-    console.log(" *******FINAL SCORE*******")
-    console.log(` Player score:    ${playerScore}`)
-    console.log(` Computer score:  ${computerScore}`)
+    finalScore.textContent= `Player score:${playerScore} Computer score:${computerScore}` 
 }
+
 
 function finalResult(){
-    if (playerScore > computerScore) {
+
+    if (playerScore === 5 ) {
         console.log('THE HUMAN WINS!')
-    } else if( computerScore > playerScore) {
-        console.log('THE COMPUTERS ARE SMARTER!')
+        guessSubmit.disabled = true
+    
+    } else if(computerScore === 5) {
+        console.log('THE COMPUTERS ARE SMARTER!')  
+        guessSubmit.disabled = true      
     } else {
         console.log('its a tie! go again!')
-    }
+      
+     }
 }
 
-function game() {
-    for (let rounds = 0; rounds < 5; rounds++) {     
-      const result = playRound();
-    }          
-    scoreBoard() 
-    finalResult()
- }
